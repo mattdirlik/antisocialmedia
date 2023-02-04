@@ -1,4 +1,4 @@
-package com.example.antisocialmedia
+package com.example.cartalkuk
 
 import org.junit.Test
 

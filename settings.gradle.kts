@@ -15,5 +15,5 @@ dependencyResolutionManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = "Anti-Social Media"
+rootProject.name = "Car Talk UK"
 include(":app")

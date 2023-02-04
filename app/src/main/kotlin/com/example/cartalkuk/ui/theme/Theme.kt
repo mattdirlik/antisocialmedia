@@ -1,4 +1,4 @@
-package com.example.antisocialmedia.ui.theme
+package com.example.cartalkuk.ui.theme
 
 import android.app.Activity
 import android.os.Build

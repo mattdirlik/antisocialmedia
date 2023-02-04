@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.antisocialmedia"
+    namespace = "com.example.cartalkuk"
     compileSdk = compile_sdk_version
 
     defaultConfig {
-        applicationId = "com.example.antisocialmedia"
+        applicationId = "com.example.cartalkuk"
         minSdk = min_sdk_version
         targetSdk = target_sdk_version
         versionCode = 1
