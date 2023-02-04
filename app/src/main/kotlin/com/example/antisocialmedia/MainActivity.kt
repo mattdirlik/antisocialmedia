@@ -3,13 +3,16 @@ package com.example.antisocialmedia
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import com.example.antisocialmedia.ui.theme.AntisocialmediaTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +25,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Column {
+                        AppTitle()
+                    }
                 }
             }
         }
@@ -30,10 +35,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun AppTitle(modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
-        modifier = modifier
+        modifier = modifier,
+        text = "Welcome to the Anti-Social Media app",
+        textAlign = TextAlign.Center,
+        fontSize = 24.sp
     )
 }
 
@@ -41,6 +48,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     AntisocialmediaTheme {
-        Greeting("Android")
+        AppTitle()
     }
 }
