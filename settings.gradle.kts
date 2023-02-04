@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     repositories {
         google()
@@ -10,7 +12,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
-rootProject.name = "Antisocialmedia"
-include ':app'
+rootProject.name = "Anti-Social Media"
+include(":app")
