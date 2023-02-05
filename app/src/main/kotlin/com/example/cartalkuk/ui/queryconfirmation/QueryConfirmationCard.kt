@@ -17,7 +17,11 @@ import com.example.cartalkuk.ui.queryconfirmation.QueryConfirmationCard.ButtonSp
 import com.example.cartalkuk.ui.queryconfirmation.QueryConfirmationCard.ConfirmationCardContentPadding
 import com.example.cartalkuk.ui.queryconfirmation.QueryConfirmationCard.ConfirmationCardPadding
 import com.example.cartalkuk.ui.queryconfirmation.QueryConfirmationCard.ConfirmationPromptText
+import com.example.cartalkuk.ui.queryconfirmation.QueryConfirmationCard.NoButtonText
+import com.example.cartalkuk.ui.queryconfirmation.QueryConfirmationCard.PreviewColour
+import com.example.cartalkuk.ui.queryconfirmation.QueryConfirmationCard.PreviewMake
 import com.example.cartalkuk.ui.queryconfirmation.QueryConfirmationCard.WordSpacerWidth
+import com.example.cartalkuk.ui.queryconfirmation.QueryConfirmationCard.YesButtonText
 
 @Composable
 fun QueryConfirmationCard(
@@ -54,13 +58,13 @@ fun QueryConfirmationCard(
                 modifier = Modifier.weight(1f),
                 onClick = { onConfirmationButtonClick(true) }
             ) {
-                Text(text = "Yes")
+                Text(text = YesButtonText)
             }
             Button(
                 modifier = Modifier.weight(1f),
                 onClick = { onConfirmationButtonClick(false) }
             ) {
-                Text(text = "No")
+                Text(text = NoButtonText)
             }
         }
     }
@@ -71,13 +75,17 @@ fun QueryConfirmationCard(
 fun QueryConfirmationCardPreview() {
     QueryConfirmationCard(
         onConfirmationButtonClick = {},
-        colour = "Purple",
-        make = "Lamborghini"
+        colour = PreviewColour,
+        make = PreviewMake
     )
 }
 
 private object QueryConfirmationCard {
     const val ConfirmationPromptText = "Does this sound like the car you're looking for?"
+    const val YesButtonText = "Yes"
+    const val NoButtonText = "No"
+    const val PreviewColour = "Purple"
+    const val PreviewMake = "Lamborghini"
 
     val ConfirmationCardPadding = 24.dp
     val ConfirmationCardContentPadding = 16.dp
