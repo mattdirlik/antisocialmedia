@@ -1,5 +1,6 @@
-package com.example.cartalkuk.api
+package com.example.cartalkuk.api.datasource
 
+import com.example.cartalkuk.api.RegCheckerRetrofitObject
 import com.example.cartalkuk.data.model.VehicleEnquiryRequestModel
 import com.example.cartalkuk.data.model.VehicleEnquiryResponseModel
 import retrofit2.http.Body
