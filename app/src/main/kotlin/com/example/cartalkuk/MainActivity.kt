@@ -3,11 +3,9 @@ package com.example.cartalkuk
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.Column
 import com.example.cartalkuk.ui.HomeScreen
+import com.example.cartalkuk.ui.appwide.CarTalkTopBar
 import com.example.cartalkuk.ui.theme.AntisocialmediaTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,10 +13,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AntisocialmediaTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
+                Column {
+                    CarTalkTopBar()
                     HomeScreen()
                 }
             }
