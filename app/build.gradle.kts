@@ -60,6 +60,7 @@ dependencies {
     implementation("com.squareup.moshi:moshi:$moshi_version")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofit_version")
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation("com.squareup.okhttp3:logging-interceptor:$http_logging_version")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
     implementation("com.google.android.gms:play-services-auth:$play_auth_version")
     implementation("androidx.navigation:navigation-compose:$compose_nav_version")
