@@ -19,7 +19,8 @@ import com.example.cartalkuk.util.toLicensePlateFormat
 @Composable
 fun RegistrationInputComponent(
     value: String,
-    onValueChanged: (queriedReg: String) -> Unit
+    onValueChanged: (queriedReg: String) -> Unit,
+    onSearch: () -> Unit
 ) {
     OutlinedTextField(
         value = value,
@@ -31,7 +32,7 @@ fun RegistrationInputComponent(
             imeAction = ImeAction.Search
         ),
         keyboardActions = KeyboardActions(
-            onSearch = {}
+            onSearch = { onSearch() }
         ),
         onValueChange = { query ->
             if (query.length <= 8) {
@@ -51,7 +52,11 @@ fun RegistrationInputLabel() {
 @Preview
 @Composable
 fun RegistrationInputComponentPreview() {
-    RegistrationInputComponent(value = PreviewValue, onValueChanged = {})
+    RegistrationInputComponent(
+        value = PreviewValue,
+        onValueChanged = {},
+        onSearch = {}
+    )
 }
 
 private object RegistrationInputComponent {
