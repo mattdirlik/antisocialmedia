@@ -6,7 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.cartalkuk.vm.HomeViewModel
+import com.example.cartalkuk.ui.home.RegistrationInputComponent
+import com.example.cartalkuk.vm.home.HomeViewModel
 
 @Composable
 fun HomeScreen(
@@ -16,6 +17,9 @@ fun HomeScreen(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
+        RegistrationInputComponent(
+            value = homeViewModel.uiState.registration,
+            onValueChanged = { homeViewModel.updateRegistration(it) }
+        )
     }
 }
