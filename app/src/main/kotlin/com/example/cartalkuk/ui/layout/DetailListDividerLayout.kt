@@ -11,10 +11,13 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun DetailListDividerLayout(
+    modifier: Modifier = Modifier,
     divider: @Composable () -> Unit = { Divider(modifier = Modifier.padding(2.dp)) },
     content: @Composable () -> Unit
 ) {
-    SubcomposeLayout {constraints ->
+    SubcomposeLayout(
+        modifier = modifier
+    ) {constraints ->
         val contentPlaceables = subcompose(
             slotId = "contentSlot",
             content = content
