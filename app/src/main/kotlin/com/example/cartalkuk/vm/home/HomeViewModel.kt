@@ -25,18 +25,33 @@ class HomeViewModel(
     fun getVehicleDetails() {
         viewModelScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.Main) {
-                try {
+                viewModelState = try {
                     val response = repository.getVehicleDetails(
                         VehicleEnquiryRequestModel(
                             registrationNumber = viewModelState.queriedRegistration
                         )
                     )
 
-                    viewModelState = viewModelState.copy(errorMessage = response.motStatus)
+                    with(response) {
+                        if (errors.isEmpty()) {
+                            viewModelState.copy(
+                                vehicle = response
+                            )
+                        } else {
+                            viewModelState.copy(
+                                errorMessage = errors.first().detail
+                            )
+                        }
+                    }
+
                 } catch (e: Exception) {
-                    viewModelState = viewModelState.copy(errorMessage = "whoops")
+                    viewModelState.copy(errorMessage = "whoops")
                 }
             }
         }
+    }
+
+    fun setQueryConfirmation(isConfirmed: Boolean) {
+        viewModelState = viewModelState.copy(isQueryConfirmed = isConfirmed)
     }
 }
