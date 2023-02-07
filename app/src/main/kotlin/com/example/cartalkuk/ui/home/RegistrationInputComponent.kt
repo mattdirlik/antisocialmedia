@@ -2,14 +2,20 @@
 
 package com.example.cartalkuk.ui.home
 
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.cartalkuk.data.CarTalkConstants.One
 import com.example.cartalkuk.ui.home.RegistrationInputComponent.ExampleRegistration
 import com.example.cartalkuk.ui.home.RegistrationInputComponent.PreviewValue
@@ -27,7 +33,14 @@ fun RegistrationInputComponent(
         maxLines = One,
         singleLine = true,
         label = { RegistrationInputLabel() },
-        placeholder = { Text(ExampleRegistration)},
+        placeholder = { Text(ExampleRegistration) },
+        leadingIcon = @Composable {
+            Icon(
+                modifier = Modifier.size(36.dp),
+                imageVector = Icons.Default.Search,
+                contentDescription = "Search Icon"
+            )
+        },
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Search
         ),
