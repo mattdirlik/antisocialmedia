@@ -1,5 +1,5 @@
 // Build Versions
-const val min_sdk_version = 24
+const val min_sdk_version = 26
 const val target_sdk_version = 33
 const val compile_sdk_version = 33
 const val kotlin_compiler_ext_version = "1.4.0"
