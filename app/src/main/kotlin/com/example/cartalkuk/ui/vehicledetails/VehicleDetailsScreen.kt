@@ -40,7 +40,7 @@ fun VehicleDetailsScreen(
             StatusValidityCard(
                 modifier = Modifier.weight(1f),
                 title = motStatus ?: "",
-                date = motExpiryDate ?: "",
+                date = motExpiryDate,
                 type = "MOT expires: "
             )
         }
@@ -51,8 +51,15 @@ fun VehicleDetailsScreen(
             firstRegDate = monthOfFirstRegistration,
             firstDvlaRegDate = monthOfFirstDvlaRegistration,
             engineCapacity = engineCapacity,
-            co2Emissions = co2Emissions
-
+            co2Emissions = co2Emissions,
+            euroStatus = euroStatus,
+            yearOfManufacture = yearOfManufacture,
+            realDrivingEmissions = realDrivingEmissions,
+            exportMarker = markedForExport,
+            fuelType = fuelType,
+            vehicleTypeApproval = typeApproval,
+            wheelplan = wheelplan,
+            v5cDate = dateOfLastV5CIssued
         )
     }
 }
@@ -61,7 +68,7 @@ fun VehicleDetailsScreen(
 fun StatusValidityCard(
     modifier: Modifier = Modifier,
     title: String,
-    date: String,
+    date: String?,
     type: String
 ) {
     Card(
@@ -99,11 +106,13 @@ fun StatusValidityCard(
                 containerColor = Color(0xFF00703C)
             )
         ) {
-            val parsedDate = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE)
-            val formattedDate = DateTimeFormatter.ofPattern("dd MMM, yyyy").format(parsedDate)
+            val formattedDate = date?.let {
+                val parsedDate = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE)
+                type + DateTimeFormatter.ofPattern("dd MMM, yyyy").format(parsedDate)
+            }
             Text(
                 modifier = Modifier.padding(8.dp),
-                text = type + formattedDate,
+                text = formattedDate ?: "No date details",
                 color = MaterialTheme.colorScheme.surface
             )
         }
