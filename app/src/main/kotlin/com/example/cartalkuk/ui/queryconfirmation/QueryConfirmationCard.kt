@@ -26,8 +26,8 @@ import com.example.cartalkuk.ui.queryconfirmation.QueryConfirmationCard.YesButto
 @Composable
 fun QueryConfirmationCard(
     onConfirmationButtonClick: (isConfirmed: Boolean) -> Unit,
-    colour: String,
-    make: String
+    colour: String?,
+    make: String?
 ) {
     Card(
         modifier = Modifier.padding(ConfirmationCardPadding)
@@ -43,9 +43,9 @@ fun QueryConfirmationCard(
                 .padding(ConfirmationCardContentPadding),
             horizontalArrangement = Arrangement.Center
         ) {
-            Text(text = colour)
+            Text(text = colour ?: "")
             Spacer(modifier = Modifier.width(WordSpacerWidth))
-            Text(text = make)
+            Text(text = make ?: "")
         }
 
         Row(
