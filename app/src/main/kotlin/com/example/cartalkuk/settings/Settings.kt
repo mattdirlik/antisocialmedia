@@ -32,7 +32,7 @@ enum class ColourTheme {
 }
 
 @Composable
-fun ThemeModeSelection() {
+fun ColourThemeOptions() {
     val context = LocalContext.current
     Column {
         ColourThemeOption(
