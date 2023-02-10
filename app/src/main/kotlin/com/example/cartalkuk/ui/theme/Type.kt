@@ -27,6 +27,12 @@ val Typography = Typography(
         fontSize = 20.sp,
         letterSpacing = 0.15.sp
     ),
+    titleSmall = TextStyle(
+        fontFamily = MavenStandard,
+        fontWeight = FontWeight.Bold,
+        fontSize = 18.sp,
+        letterSpacing = 0.15.sp
+    ),
     bodyLarge = TextStyle(
         fontFamily = MavenStandard,
         fontWeight = FontWeight.Normal,
