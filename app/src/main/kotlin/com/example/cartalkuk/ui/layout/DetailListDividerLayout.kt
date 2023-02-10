@@ -10,9 +10,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
+fun DefaultDivider() {
+    Divider(
+        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+    )
+}
+@Composable
 fun DetailListDividerLayout(
     modifier: Modifier = Modifier,
-    divider: @Composable () -> Unit = { Divider(modifier = Modifier.padding(2.dp)) },
+    divider: @Composable () -> Unit = { DefaultDivider() },
     content: @Composable () -> Unit
 ) {
     SubcomposeLayout(
