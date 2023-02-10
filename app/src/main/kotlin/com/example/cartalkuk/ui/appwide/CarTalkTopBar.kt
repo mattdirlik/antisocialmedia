@@ -2,24 +2,38 @@
 
 package com.example.cartalkuk.ui.appwide
 
+import androidx.compose.foundation.clickable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.cartalkuk.ui.appwide.TitleBar.AppTitleText
 
 @Composable
-fun CarTalkTopBar() {
+fun CarTalkTopBar(
+    onSettingsClicked: () -> Unit
+) {
     CenterAlignedTopAppBar(
         title = { TopBarTitle() },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.surface
-        )
+        ),
+        actions = {
+            Icon(
+                modifier = Modifier.clickable {
+                    onSettingsClicked()
+                },
+                imageVector = Icons.Default.Settings,
+                contentDescription = "App settings"
+            )
+        }
     )
 }
 
@@ -27,7 +41,7 @@ fun CarTalkTopBar() {
 fun TopBarTitle() {
     Text(
         text = AppTitleText,
-        fontSize = 30.sp,
+        style = MaterialTheme.typography.titleMedium,
         color = MaterialTheme.colorScheme.onSurface
     )
 }
@@ -35,7 +49,7 @@ fun TopBarTitle() {
 @Preview
 @Composable
 fun TitleBarPreview() {
-    CarTalkTopBar()
+    CarTalkTopBar(onSettingsClicked = {})
 }
 
 private object TitleBar {
