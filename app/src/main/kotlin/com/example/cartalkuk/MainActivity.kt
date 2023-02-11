@@ -49,13 +49,15 @@ class MainActivity : ComponentActivity() {
                             drawerState = drawerState,
                             gesturesEnabled = drawerState.isOpen,
                             drawerContent = {
-                                Surface(
-                                    modifier = Modifier
-                                        .fillMaxHeight()
-                                        .width(IntrinsicSize.Max),
-                                    color = MaterialTheme.colorScheme.background
-                                ) {
-                                    ColourThemeOptions()
+                                CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+                                    Surface(
+                                        modifier = Modifier
+                                            .fillMaxHeight()
+                                            .width(IntrinsicSize.Max),
+                                        color = MaterialTheme.colorScheme.background
+                                    ) {
+                                        ColourThemeOptions()
+                                    }
                                 }
                             },
                             content = {
