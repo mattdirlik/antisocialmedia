@@ -90,7 +90,7 @@ fun ColourThemeOption(
             .clickable {
                 onClick()
             }
-            .padding(horizontal = 4.dp),
+            .padding(4.dp),
         text = text,
         style = MaterialTheme.typography.bodyMedium,
     )
