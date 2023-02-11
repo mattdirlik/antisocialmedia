@@ -44,10 +44,14 @@ val Typography = Typography(
         fontFamily = MavenStandard,
         fontSize = 16.sp
     ),
+    bodySmall = TextStyle(
+        fontFamily = MavenStandard,
+        fontSize = 14.sp
+    ),
     labelLarge = TextStyle(
         fontFamily = MavenStandard,
         fontWeight = FontWeight.Medium,
-        fontSize = 14.sp,
+        fontSize = 16.sp,
         letterSpacing = 1.25.sp
     ),
 )
