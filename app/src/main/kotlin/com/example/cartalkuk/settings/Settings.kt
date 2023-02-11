@@ -3,6 +3,7 @@ package com.example.cartalkuk.settings
 import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -13,7 +14,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.cartalkuk.BuildConfig
 import com.example.cartalkuk.settings.AppSettings.colourTheme
 import com.example.cartalkuk.settings.ColourTheme.Light
 import com.example.cartalkuk.settings.ColourTheme.Dark
@@ -34,7 +37,15 @@ enum class ColourTheme {
 @Composable
 fun ColourThemeOptions() {
     val context = LocalContext.current
-    Column {
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .padding(bottom = 16.dp)
+    ) {
+        Text(
+            text = "Colour Theme",
+            style = MaterialTheme.typography.titleSmall
+        )
         ColourThemeOption(
             text = Light.name,
             onClick = {
@@ -56,6 +67,14 @@ fun ColourThemeOptions() {
                 context.setColourThemeFromData(System)
             }
         )
+        Spacer(modifier = Modifier.weight(1f))
+
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "App version: " + BuildConfig.VERSION_NAME,
+            style = MaterialTheme.typography.bodySmall,
+            textAlign = TextAlign.Center
+        )
     }
 }
 
@@ -71,9 +90,9 @@ fun ColourThemeOption(
             .clickable {
                 onClick()
             }
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = 4.dp),
         text = text,
-        style = MaterialTheme.typography.titleSmall,
+        style = MaterialTheme.typography.bodyMedium,
     )
 }
 
