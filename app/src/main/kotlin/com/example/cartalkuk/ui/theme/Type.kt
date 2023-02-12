@@ -1,6 +1,7 @@
 package com.example.cartalkuk.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -11,6 +12,12 @@ import com.example.cartalkuk.R
 val MavenStandard = FontFamily(
     Font(
         resId = R.font.mavenpro
+    )
+)
+
+val CharlesWright = FontFamily(
+    Font(
+        resId = R.font.charleswrightbold
     )
 )
 
@@ -54,4 +61,11 @@ val Typography = Typography(
         fontSize = 16.sp,
         letterSpacing = 1.25.sp
     ),
+)
+
+val RegPlateTextStyle = TextStyle(
+    color = Color.Black,
+    fontFamily = CharlesWright,
+    fontSize = 24.sp,
+    letterSpacing = 0.5.sp
 )
