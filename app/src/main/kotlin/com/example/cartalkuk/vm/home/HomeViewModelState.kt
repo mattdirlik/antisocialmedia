@@ -7,13 +7,15 @@ data class HomeViewModelState(
     val queriedRegistration: String = "",
     val isQueryConfirmed: Boolean = false,
     val vehicle: VehicleEnquiryResponseModel? = null,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
+    val isLoadingSpinnerShown: Boolean = false
 ) {
     fun toUiState(): HomeUiState =
         if (vehicle == null) {
             HomeUiState.Default(
                 registration = queriedRegistration,
-                errorMessage = errorMessage
+                errorMessage = errorMessage,
+                isLoadingSpinnerShown = isLoadingSpinnerShown
             )
         } else {
             if (isQueryConfirmed) {

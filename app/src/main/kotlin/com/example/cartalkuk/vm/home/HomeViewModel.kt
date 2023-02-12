@@ -23,6 +23,11 @@ class HomeViewModel(
     }
 
     fun getVehicleDetails() {
+        viewModelState = viewModelState.copy(
+            isLoadingSpinnerShown = true,
+            isQueryConfirmed = false
+        )
+
         viewModelScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.Main) {
                 viewModelState = try {
@@ -35,17 +40,21 @@ class HomeViewModel(
                     with(response) {
                         if (errors.isEmpty()) {
                             viewModelState.copy(
-                                vehicle = response
+                                vehicle = response,
+                                isLoadingSpinnerShown = false
                             )
                         } else {
                             viewModelState.copy(
-                                errorMessage = errors.first().detail
+                                errorMessage = errors.first().detail,
+                                isLoadingSpinnerShown = false
                             )
                         }
                     }
-
                 } catch (e: Exception) {
-                    viewModelState.copy(errorMessage = "whoops")
+                    viewModelState.copy(
+                        errorMessage = "whoops",
+                        isLoadingSpinnerShown = false
+                    )
                 }
             }
         }

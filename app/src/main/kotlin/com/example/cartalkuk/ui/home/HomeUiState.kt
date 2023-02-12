@@ -7,7 +7,8 @@ sealed interface HomeUiState {
 
     data class Default(
         override val registration: String,
-        val errorMessage: String?
+        val errorMessage: String?,
+        val isLoadingSpinnerShown: Boolean
     ): HomeUiState
 
     data class QueryConfirmation(
