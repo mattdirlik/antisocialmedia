@@ -1,49 +1,63 @@
 package com.example.cartalkuk.ui.vehicledetails
 
-import androidx.compose.foundation.BorderStroke
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cartalkuk.data.model.VehicleEnquiryResponseModel
-import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsScreen.StatusValidityCardPadding
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import com.example.cartalkuk.ui.theme.RegCheckerTheme
+import com.example.cartalkuk.ui.theme.RegistrationPlateBackground
+import com.example.cartalkuk.ui.theme.RegPlateTextStyle
+import com.example.cartalkuk.ui.vehicledetails.TaxStatus.Taxed
+import com.example.cartalkuk.ui.vehicledetails.TaxStatus.Sorn
+import com.example.cartalkuk.ui.vehicledetails.TaxStatus.NotRoadTaxed
+import com.example.cartalkuk.ui.vehicledetails.TaxStatus.Untaxed
+import com.example.cartalkuk.ui.vehicledetails.MotStatus.Valid
+import com.example.cartalkuk.ui.vehicledetails.MotStatus.NotValid
+import com.example.cartalkuk.ui.vehicledetails.MotStatus.NoResults
+import com.example.cartalkuk.ui.vehicledetails.MotStatus.NoDetailsHeld
+import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard
+import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard
+.StatusValidityCardVariant.ValidVariant
+import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard
+.StatusValidityCardVariant.InvalidVariant
+import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard
+.StatusValidityCardVariant.UnknownVariant
+
 
 @Composable
 fun VehicleDetailsScreen(
-    vehicle: VehicleEnquiryResponseModel
+    vehicle: VehicleEnquiryResponseModel,
+    onBackPressed: () -> Unit = {}
 ) {
     with(vehicle) {
-        Row {
-            StatusValidityCard(
-                modifier = Modifier.weight(1f),
-                title = taxStatus ?: "",
-                date = taxDueDate ?: "",
-                type = "Tax due: "
-            )
-            StatusValidityCard(
-                modifier = Modifier.weight(1f),
-                title = motStatus ?: "",
-                date = motExpiryDate,
-                type = "MOT expires: "
+        registrationNumber?.let {
+            RegistrationPlate(
+                registration = it
             )
         }
+
+        TaxAndMotStatusRow(
+            taxStatus = taxStatus,
+            taxDueDate = taxDueDate,
+            motStatus = motStatus,
+            motExpiryDate = motExpiryDate
+        )
 
         VehicleDetailsList(
             colour = colour ?: "",
@@ -59,89 +73,126 @@ fun VehicleDetailsScreen(
             fuelType = fuelType,
             vehicleTypeApproval = typeApproval,
             wheelplan = wheelplan,
+            revenueWeight = revenueWeight,
             v5cDate = dateOfLastV5CIssued
+        )
+    }
+
+    BackHandler {
+        onBackPressed()
+    }
+}
+
+@Composable
+fun RegistrationPlate(
+    modifier: Modifier = Modifier,
+    registration: String
+) {
+    Box(
+        modifier = modifier
+            .clip(RoundedCornerShape(8.dp))
+            .background(RegistrationPlateBackground)
+            .padding(horizontal = 64.dp)
+            .padding(vertical = 8.dp)
+    ) {
+        Text(
+            text = registration,
+            style = RegPlateTextStyle
         )
     }
 }
 
 @Composable
-fun StatusValidityCard(
-    modifier: Modifier = Modifier,
-    title: String,
-    date: String?,
-    type: String
+fun TaxAndMotStatusRow(
+    taxStatus: String?,
+    taxDueDate: String?,
+    motStatus: String?,
+    motExpiryDate: String?
 ) {
-    Card(
+    Row(
         modifier = Modifier
-            .padding(StatusValidityCardPadding)
-            .then(modifier),
-        border = BorderStroke(
-            width = 2.dp,
-            color = Color(0xFF00703C)
-        )
+            .fillMaxWidth()
+            .height(IntrinsicSize.Max)
+            .padding(24.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Row(
-            modifier = Modifier.padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = title
-            )
+        val taxVariant = when (taxStatus) {
+            Taxed.validity -> ValidVariant
+            Untaxed.validity -> InvalidVariant
+            NotRoadTaxed.validity,
+            Sorn.validity -> UnknownVariant
 
-            Spacer(modifier = Modifier.weight(1f))
+            else -> UnknownVariant
+        }
+        val motVariant = when (motStatus) {
+            Valid.validity -> ValidVariant
+            NotValid.validity -> InvalidVariant
+            NoResults.validity,
+            NoDetailsHeld.validity -> UnknownVariant
 
-            Icon(
-                modifier = Modifier.size(48.dp),
-                imageVector = Icons.Default.CheckCircle,
-                contentDescription = "",
-                tint = Color(0xFF00703C)
-            )
+            else -> UnknownVariant
         }
 
-        Card(
+        StatusValidityCard(
             modifier = Modifier
-                .padding(top = 16.dp)
-                .fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFF00703C)
-            )
-        ) {
-            val formattedDate = date?.let {
-                val parsedDate = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE)
-                type + DateTimeFormatter.ofPattern("dd MMM, yyyy").format(parsedDate)
-            }
-            Text(
-                modifier = Modifier.padding(8.dp),
-                text = formattedDate ?: "No date details",
-                color = MaterialTheme.colorScheme.surface
-            )
-        }
+                .weight(1f)
+                .fillMaxHeight(),
+            variant = taxVariant,
+            statusText = taxStatus ?: "",
+            date = taxDueDate ?: "",
+            type = "Tax due: ",
+        )
+        StatusValidityCard(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight(),
+            variant = motVariant,
+            statusText = "MOT",
+            date = motExpiryDate,
+            type = "MOT expires: ",
+        )
     }
 }
 
 @Preview
 @Composable
-fun StatusValidityCardPreview() {
-    StatusValidityCard(title = "Taxed", date = "2023-05-01", type = "Tax due: ")
+fun RegistrationPlatePreview() {
+    RegCheckerTheme {
+        RegistrationPlate(registration = "YY03TKT")
+    }
 }
 
 @Preview
 @Composable
 fun VehicleDetailsScreenPreview() {
-    Column {
-        VehicleDetailsScreen(
-            vehicle = VehicleEnquiryResponseModel(
-                colour = "silver",
-                make = "suzuki",
-                taxStatus = "Taxed",
-                taxDueDate = "1998-05-09",
-                motStatus = "MOT Valid",
-                motExpiryDate = "2021-12-30"
-            )
-        )
+    RegCheckerTheme {
+        Surface {
+            Column {
+                VehicleDetailsScreen(
+                    vehicle = VehicleEnquiryResponseModel(
+                        colour = "silver",
+                        make = "suzuki",
+                        taxStatus = "Taxed",
+                        taxDueDate = "1998-05-09",
+                        motStatus = "Valid",
+                        motExpiryDate = "2021-12-30"
+                    )
+                )
+            }
+        }
     }
 }
 
-object VehicleDetailsScreen {
-    val StatusValidityCardPadding = 8.dp
+enum class MotStatus(val validity: String) {
+    Valid("Valid"),
+    NotValid("Not valid"),
+    NoDetailsHeld("No details held by DVLA"),
+    NoResults("No results returned")
+}
+
+enum class TaxStatus(val validity: String) {
+    Taxed("Taxed"),
+    Untaxed("Untaxed"),
+    NotRoadTaxed("Not Taxed for on Road Use"),
+    Sorn("SORN")
 }

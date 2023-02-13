@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
@@ -62,7 +63,13 @@ class MainActivity : ComponentActivity() {
                             },
                             content = {
                                 CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
-                                    HomeScreen()
+                                    Surface(
+                                        modifier = Modifier
+                                            .fillMaxSize(),
+                                        color = MaterialTheme.colorScheme.background
+                                    ) {
+                                        HomeScreen()
+                                    }
                                 }
                             }
                         )
