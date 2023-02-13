@@ -40,6 +40,21 @@ val Typography = Typography(
         fontSize = 18.sp,
         letterSpacing = 0.15.sp
     ),
+    headlineLarge = TextStyle(
+        fontFamily = MavenStandard,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 18.sp
+    ),
+    headlineMedium = TextStyle(
+        fontFamily = MavenStandard,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 16.sp
+    ),
+    headlineSmall = TextStyle(
+        fontFamily = MavenStandard,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp
+    ),
     bodyLarge = TextStyle(
         fontFamily = MavenStandard,
         fontWeight = FontWeight.Normal,
@@ -57,10 +72,19 @@ val Typography = Typography(
     ),
     labelLarge = TextStyle(
         fontFamily = MavenStandard,
-        fontWeight = FontWeight.Medium,
-        fontSize = 16.sp,
-        letterSpacing = 1.25.sp
+        fontWeight = FontWeight.Black,
+        fontSize = 16.sp
     ),
+    labelMedium = TextStyle(
+        fontFamily = MavenStandard,
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = MavenStandard,
+        fontWeight = FontWeight.ExtraLight,
+        fontSize = 12.sp
+    )
 )
 
 val RegPlateTextStyle = TextStyle(
