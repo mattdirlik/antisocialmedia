@@ -13,6 +13,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,9 +28,11 @@ import com.example.cartalkuk.util.toLicensePlateFormat
 fun RegistrationInputComponent(
     value: String,
     onValueChanged: (queriedReg: String) -> Unit,
-    onSearch: () -> Unit
+    onSearch: () -> Unit,
+    focusRequester: FocusRequester
 ) {
     OutlinedTextField(
+        modifier = Modifier.focusRequester(focusRequester),
         value = value,
         maxLines = One,
         singleLine = true,
@@ -68,7 +72,8 @@ fun RegistrationInputComponentPreview() {
     RegistrationInputComponent(
         value = PreviewValue,
         onValueChanged = {},
-        onSearch = {}
+        onSearch = {},
+        focusRequester = FocusRequester()
     )
 }
 

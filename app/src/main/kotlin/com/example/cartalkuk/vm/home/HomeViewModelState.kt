@@ -5,10 +5,10 @@ import com.example.cartalkuk.ui.home.HomeUiState
 
 data class HomeViewModelState(
     val queriedRegistration: String = "",
-    val isQueryConfirmed: Boolean = false,
     val vehicle: VehicleEnquiryResponseModel? = null,
     val errorMessage: String? = null,
-    val isLoadingSpinnerShown: Boolean = false
+    val isLoadingSpinnerShown: Boolean = false,
+    val isVehicleDetailsOpen: Boolean = false
 ) {
     fun toUiState(): HomeUiState =
         if (vehicle == null) {
@@ -18,7 +18,7 @@ data class HomeViewModelState(
                 isLoadingSpinnerShown = isLoadingSpinnerShown
             )
         } else {
-            if (isQueryConfirmed) {
+            if (isVehicleDetailsOpen) {
                 HomeUiState.VehicleDetails(
                     registration = queriedRegistration,
                     vehicle = vehicle

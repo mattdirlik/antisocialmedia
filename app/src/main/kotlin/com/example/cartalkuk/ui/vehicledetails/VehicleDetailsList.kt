@@ -14,9 +14,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cartalkuk.ui.layout.DetailListDividerLayout
 import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.Co2EmissionsKey
-import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.Co2EmissionsPrefix
+import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.Co2EmissionsSuffix
 import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.ColourKey
-import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.CylinderCapacityPrefix
+import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.CylinderCapacitySuffix
 import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.EngineCapacityKey
 import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.EuroStatusKey
 import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.ExportMarkerKey
@@ -25,6 +25,8 @@ import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.FirstRegDateKe
 import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.FuelTypeKey
 import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.MakeKey
 import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.RealDrivingEmissionsKey
+import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.RevenueWeightKey
+import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.RevenueWeightSuffix
 import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.V5CKey
 import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.VehicleDetailsListPadding
 import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsList.VehicleTypeApprovalKey
@@ -46,6 +48,7 @@ fun VehicleDetailsList(
     exportMarker: Boolean?,
     vehicleTypeApproval: String?,
     wheelplan: String?,
+    revenueWeight: Int?,
     v5cDate: String?
 ) {
     DetailListDividerLayout(
@@ -76,13 +79,13 @@ fun VehicleDetailsList(
         engineCapacity?.let {
             KeyValueText(
                 key = EngineCapacityKey,
-                value = it.toString() + CylinderCapacityPrefix
+                value = it.toString() + CylinderCapacitySuffix
             )
         }
         co2Emissions?.let {
             KeyValueText(
                 key = Co2EmissionsKey,
-                value = it.toString() + Co2EmissionsPrefix
+                value = it.toString() + Co2EmissionsSuffix
             )
         }
         fuelType?.let {
@@ -119,6 +122,12 @@ fun VehicleDetailsList(
             KeyValueText(
                 key = WheelplanKey,
                 value = it
+            )
+        }
+        revenueWeight?.let {
+            KeyValueText(
+                key = RevenueWeightKey,
+                value = it.toString() + RevenueWeightSuffix
             )
         }
         v5cDate?.let {
@@ -170,6 +179,7 @@ fun VehicleDetailsListPreview() {
             fuelType = "Petrol",
             vehicleTypeApproval = "N1",
             wheelplan = "2 AXLE RIGID BODY",
+            revenueWeight = 1640,
             v5cDate = "2021-07-08"
         )
     }
@@ -182,8 +192,8 @@ private object VehicleDetailsList {
     const val FirstDvlaRegDateKey = "Date of first DVLA registration"
     const val YearOfManufactureKey = "Year of manufacture"
     const val EngineCapacityKey = "Engine capacity"
-    const val CylinderCapacityPrefix = " cc"
-    const val Co2EmissionsPrefix = " ᵍ⁄ₖₘ"
+    const val CylinderCapacitySuffix = " cc"
+    const val Co2EmissionsSuffix = " ᵍ⁄ₖₘ"
     const val Co2EmissionsKey = "CO₂ emissions"
     const val FuelTypeKey = "Fuel type"
     const val EuroStatusKey = "Euro status"
@@ -191,7 +201,9 @@ private object VehicleDetailsList {
     const val ExportMarkerKey = "Export marker"
     const val VehicleTypeApprovalKey = "Vehicle type approval"
     const val WheelplanKey = "Wheelplan"
-    const val V5CKey = "Date of last V5C (logbook) issue"
+    const val RevenueWeightKey = "Revenue Date"
+    const val RevenueWeightSuffix = " kg"
+    const val V5CKey = "Last V5C (logbook) issued"
 
     val VehicleDetailsListPadding = 24.dp
 }

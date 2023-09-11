@@ -2,17 +2,16 @@
 
 package com.example.cartalkuk.ui.appwide
 
-import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.cartalkuk.ui.appwide.TitleBar.AppTitleText
 
@@ -26,13 +25,14 @@ fun CarTalkTopBar(
             containerColor = MaterialTheme.colorScheme.surface
         ),
         actions = {
-            Icon(
-                modifier = Modifier.clickable {
-                    onSettingsClicked()
-                },
-                imageVector = Icons.Default.Settings,
-                contentDescription = "App settings"
-            )
+            IconButton(
+                onClick = { onSettingsClicked() }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Settings,
+                    contentDescription = "App settings"
+                )
+            }
         }
     )
 }

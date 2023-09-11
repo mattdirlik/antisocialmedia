@@ -56,6 +56,7 @@ dependencies {
     implementation("androidx.compose.ui:ui:$compose_version")
     implementation("androidx.compose.ui:ui-graphics:$compose_version")
     implementation("androidx.compose.ui:ui-tooling-preview:$compose_version")
+    implementation("androidx.compose.ui:ui-text-google-fonts:$compose_version")
     implementation("androidx.compose.material3:material3:$material_3_version")
     implementation("com.squareup.moshi:moshi:$moshi_version")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofit_version")

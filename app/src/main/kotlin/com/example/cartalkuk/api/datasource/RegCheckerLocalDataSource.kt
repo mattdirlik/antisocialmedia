@@ -14,10 +14,10 @@ class RegCheckerLocalDataSource: RegCheckerDataSource {
     }
 }
 
-private const val json = "{\"artEndDate\":\"2025-02-28\",\"co2Emissions\":135," +
-        "\"colour\":\"BLUE\",\"engineCapacity\":2494,\"fuelType\":\"PETROL\",\"make\":\"ROVER\"," +
-        "\"markedForExport\":false,\"monthOfFirstRegistration\":\"2004-12\",\"motStatus\":\"No " +
-        "details held by DVLA\",\"registrationNumber\":\"ABC1234\",\"revenueWeight\":1640," +
-        "\"taxDueDate\":\"2007-01-01\",\"taxStatus\":\"Untaxed\",\"typeApproval\":\"N1\"," +
-        "\"wheelplan\":\"NON STANDARD\",\"yearOfManufacture\":2004,\"euroStatus\":\"EURO 6 AD\"," +
-        "\"realDrivingEmissions\":\"1\",\"dateOfLastV5CIssued\":\"2016-12-25\"}"
+private const val json = "{\"registrationNumber\":\"YY03TKT\", \"taxStatus\": \"Taxed\", " +
+        "\"taxDueDate\": \"2023-05-01\",\"motStatus\": \"Valid\", \"make\": \"SUZUKI\", " +
+        "\"yearOfManufacture\":2003, \"engineCapacity\": 1298, \"co2Emissions\": 152," +
+        "\"fuelType\": \"PETROL\", \"markedForExport\": false, \"colour\":\"SILVER\", " +
+        "\"typeApproval\": \"M1\", \"dateOfLastV5CIssued\": \"2021-07-08\",\"motExpiryDate\": " +
+        "\"2023-04-26\", \"wheelplan\": \"2 AXLE RIGID BODY\", " +
+        "\"monthOfFirstRegistration\":\"2003-05\"}"

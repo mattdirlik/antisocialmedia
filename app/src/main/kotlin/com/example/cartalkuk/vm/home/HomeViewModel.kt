@@ -7,13 +7,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cartalkuk.api.RegCheckerRepository
+import com.example.cartalkuk.api.datasource.RegCheckerRemoteDataSource
 import com.example.cartalkuk.data.model.VehicleEnquiryRequestModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomeViewModel(
-    private val repository: RegCheckerRepository = RegCheckerRepository()
+    private val repository: RegCheckerRepository = RegCheckerRepository(RegCheckerRemoteDataSource())
 ) : ViewModel() {
     private var viewModelState by mutableStateOf(HomeViewModelState())
     val uiState by derivedStateOf { viewModelState.toUiState() }
@@ -24,8 +25,7 @@ class HomeViewModel(
 
     fun getVehicleDetails() {
         viewModelState = viewModelState.copy(
-            isLoadingSpinnerShown = true,
-            isQueryConfirmed = false
+            isLoadingSpinnerShown = true
         )
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -60,7 +60,10 @@ class HomeViewModel(
         }
     }
 
-    fun setQueryConfirmation(isConfirmed: Boolean) {
-        viewModelState = viewModelState.copy(isQueryConfirmed = isConfirmed)
+    fun setVehicleDetailsOpenStatus(isOpen: Boolean) {
+        viewModelState = viewModelState.copy(
+            isVehicleDetailsOpen = isOpen,
+            vehicle = viewModelState.vehicle.takeIf { isOpen }
+        )
     }
 }

@@ -92,7 +92,7 @@ object StatusValidityCard {
         abstract val colour: Color
         abstract val icon: (@Composable () -> Unit)?
 
-        object Valid : StatusValidityCardVariant() {
+        object ValidVariant : StatusValidityCardVariant() {
             override val colour = ValidColour
             override val icon = @Composable {
                     Icon(
@@ -104,7 +104,7 @@ object StatusValidityCard {
                 }
         }
 
-        object Invalid : StatusValidityCardVariant() {
+        object InvalidVariant : StatusValidityCardVariant() {
             override val colour = InvalidColour
             override val icon = @Composable {
                 Icon(
@@ -116,7 +116,7 @@ object StatusValidityCard {
             }
         }
 
-        object Unknown : StatusValidityCardVariant() {
+        object UnknownVariant : StatusValidityCardVariant() {
             override val colour = UnknownColour
             override val icon = null
         }

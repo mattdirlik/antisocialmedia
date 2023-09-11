@@ -25,7 +25,7 @@ import com.example.cartalkuk.ui.queryconfirmation.QueryConfirmationCard.YesButto
 
 @Composable
 fun QueryConfirmationCard(
-    onConfirmationButtonClick: (isConfirmed: Boolean) -> Unit,
+    onButtonClick: (isConfirmed: Boolean) -> Unit,
     colour: String?,
     make: String?
 ) {
@@ -56,13 +56,13 @@ fun QueryConfirmationCard(
         ) {
             Button(
                 modifier = Modifier.weight(1f),
-                onClick = { onConfirmationButtonClick(true) }
+                onClick = { onButtonClick(true) }
             ) {
                 Text(text = YesButtonText)
             }
             Button(
                 modifier = Modifier.weight(1f),
-                onClick = { onConfirmationButtonClick(false) }
+                onClick = { onButtonClick(false) }
             ) {
                 Text(text = NoButtonText)
             }
@@ -74,7 +74,7 @@ fun QueryConfirmationCard(
 @Composable
 fun QueryConfirmationCardPreview() {
     QueryConfirmationCard(
-        onConfirmationButtonClick = {},
+        onButtonClick = {},
         colour = PreviewColour,
         make = PreviewMake
     )
