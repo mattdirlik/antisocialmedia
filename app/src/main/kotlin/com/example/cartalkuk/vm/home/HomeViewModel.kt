@@ -41,7 +41,7 @@ class HomeViewModel @Inject constructor(
                     )
 
                     with(response) {
-                        if (errors.isEmpty()) {
+                        if (errors.isNullOrEmpty()) {
                             viewModelState.copy(
                                 vehicle = response,
                                 isLoadingSpinnerShown = false
@@ -55,7 +55,7 @@ class HomeViewModel @Inject constructor(
                     }
                 } catch (e: Exception) {
                     viewModelState.copy(
-                        errorMessage = "whoops",
+                        errorMessage = e.message,
                         isLoadingSpinnerShown = false
                     )
                 }

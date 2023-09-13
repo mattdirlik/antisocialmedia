@@ -1,15 +1,26 @@
 package com.example.cartalkuk.api
 
-import dagger.Binds
+import com.example.cartalkuk.api.datasource.RegCheckerRemoteDataSource
+import com.example.cartalkuk.database.dao.VehicleDao
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface DataModule {
-    @Binds
-    fun bindsRegCheckerRepository(
-        repository: RegCheckerRepository
-    ): RegCheckerRepository
+object DataModule {
+    @Singleton
+    @Provides
+    fun providesRegCheckerRemoteDataSource(
+        regCheckerService: RegCheckerService
+    ) = RegCheckerRemoteDataSource(regCheckerService)
+
+    @Singleton
+    @Provides
+    fun provideRegCheckerRepository(
+        remoteDataSource: RegCheckerRemoteDataSource,
+        vehicleDao: VehicleDao
+    ) = RegCheckerRepository(remoteDataSource, vehicleDao)
 }

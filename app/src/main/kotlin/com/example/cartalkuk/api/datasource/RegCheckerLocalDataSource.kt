@@ -4,8 +4,8 @@ import com.example.cartalkuk.data.model.VehicleEnquiryRequestModel
 import com.example.cartalkuk.database.entity.VehicleEntity
 import com.squareup.moshi.Moshi
 
-class RegCheckerLocalDataSource: RegCheckerDataSource {
-    override suspend fun getVehicleDetails(
+class RegCheckerLocalDataSource {
+    fun getVehicleDetails(
         request: VehicleEnquiryRequestModel
     ): VehicleEntity {
         val moshi = Moshi.Builder().build()

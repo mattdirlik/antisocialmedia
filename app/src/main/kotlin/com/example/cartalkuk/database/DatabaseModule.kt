@@ -20,5 +20,7 @@ object DatabaseModule {
         context = context,
         klass = CarTalkDatabase::class.java,
         name = "cartalk-database"
-    ).build()
+    )
+        .allowMainThreadQueries()
+        .build()
 }

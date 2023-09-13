@@ -30,5 +30,5 @@ data class VehicleEntity(
     val dateOfLastV5CIssued: String? = null,
     val euroStatus: String? = null,
     val automatedVehicle: Boolean? = null,
-    val errors: List<VehicleEnquiryApiErrorModel> = listOf()
+    val errors: List<VehicleEnquiryApiErrorModel>? = null
 )

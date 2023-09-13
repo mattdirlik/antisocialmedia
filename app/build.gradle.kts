@@ -31,11 +31,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -43,7 +43,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = kotlin_compiler_ext_version
     }
-    packaging {
+    packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -62,7 +62,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:$compose_version")
     implementation("androidx.compose.ui:ui-text-google-fonts:$compose_version")
     implementation("androidx.compose.material3:material3:$material_3_version")
-    implementation("com.squareup.moshi:moshi:$moshi_version")
+    implementation("com.squareup.moshi:moshi-kotlin:$moshi_version")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofit_version")
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
     implementation("com.squareup.okhttp3:logging-interceptor:$http_logging_version")
@@ -74,6 +74,7 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:$hilt_navigation_version")
 
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+    kapt("androidx.room:room-compiler:$room_version")
 
     testImplementation("junit:junit:$junit_version")
     androidTestImplementation("androidx.test.ext:junit:$junit_ext_version")
