@@ -1,8 +1,10 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
+    kotlin("kapt")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -49,6 +51,8 @@ android {
 }
 
 dependencies {
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+
     implementation("androidx.core:core-ktx:$core_ktx_version")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
@@ -65,6 +69,10 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
     implementation("com.google.android.gms:play-services-auth:$play_auth_version")
     implementation("androidx.navigation:navigation-compose:$compose_nav_version")
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("com.google.dagger:hilt-android:$hilt_version")
+
+    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
     testImplementation("junit:junit:$junit_version")
     androidTestImplementation("androidx.test.ext:junit:$junit_ext_version")
@@ -72,4 +80,8 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
     debugImplementation("androidx.compose.ui:ui-tooling:$compose_version")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
+}
+
+kapt {
+    correctErrorTypes = true
 }
