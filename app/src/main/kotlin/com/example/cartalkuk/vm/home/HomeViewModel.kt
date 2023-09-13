@@ -7,14 +7,17 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cartalkuk.api.RegCheckerRepository
-import com.example.cartalkuk.api.datasource.RegCheckerRemoteDataSource
 import com.example.cartalkuk.data.model.VehicleEnquiryRequestModel
+import com.example.cartalkuk.database.entity.VehicleEntity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class HomeViewModel(
-    private val repository: RegCheckerRepository = RegCheckerRepository(RegCheckerRemoteDataSource())
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val repository: RegCheckerRepository
 ) : ViewModel() {
     private var viewModelState by mutableStateOf(HomeViewModelState())
     val uiState by derivedStateOf { viewModelState.toUiState() }
@@ -65,5 +68,9 @@ class HomeViewModel(
             isVehicleDetailsOpen = isOpen,
             vehicle = viewModelState.vehicle.takeIf { isOpen }
         )
+    }
+
+    fun upsertVehicleToGarage(vehicleEntity: VehicleEntity) {
+        repository.upsertVehicle(vehicleEntity)
     }
 }

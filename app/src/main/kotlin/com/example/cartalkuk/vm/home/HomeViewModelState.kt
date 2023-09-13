@@ -1,11 +1,11 @@
 package com.example.cartalkuk.vm.home
 
-import com.example.cartalkuk.data.model.VehicleEnquiryResponseModel
+import com.example.cartalkuk.database.entity.VehicleEntity
 import com.example.cartalkuk.ui.home.HomeUiState
 
 data class HomeViewModelState(
     val queriedRegistration: String = "",
-    val vehicle: VehicleEnquiryResponseModel? = null,
+    val vehicle: VehicleEntity? = null,
     val errorMessage: String? = null,
     val isLoadingSpinnerShown: Boolean = false,
     val isVehicleDetailsOpen: Boolean = false

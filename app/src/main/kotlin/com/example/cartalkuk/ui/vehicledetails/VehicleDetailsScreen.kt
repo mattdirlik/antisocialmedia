@@ -19,7 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.cartalkuk.data.model.VehicleEnquiryResponseModel
+import com.example.cartalkuk.database.entity.VehicleEntity
+import com.example.cartalkuk.ui.garage.AddCarToGarageButton
 import com.example.cartalkuk.ui.theme.RegCheckerTheme
 import com.example.cartalkuk.ui.theme.RegistrationPlateBackground
 import com.example.cartalkuk.ui.theme.RegPlateTextStyle
@@ -42,15 +43,14 @@ import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard
 
 @Composable
 fun VehicleDetailsScreen(
-    vehicle: VehicleEnquiryResponseModel,
+    vehicle: VehicleEntity,
+    onAddToGarageClick: () -> Unit = {},
     onBackPressed: () -> Unit = {}
 ) {
     with(vehicle) {
-        registrationNumber?.let {
-            RegistrationPlate(
-                registration = it
-            )
-        }
+        RegistrationPlate(
+            registration = registrationNumber
+        )
 
         TaxAndMotStatusRow(
             taxStatus = taxStatus,
@@ -75,6 +75,10 @@ fun VehicleDetailsScreen(
             wheelplan = wheelplan,
             revenueWeight = revenueWeight,
             v5cDate = dateOfLastV5CIssued
+        )
+
+        AddCarToGarageButton(
+            onClick = onAddToGarageClick
         )
     }
 
@@ -169,7 +173,8 @@ fun VehicleDetailsScreenPreview() {
         Surface {
             Column {
                 VehicleDetailsScreen(
-                    vehicle = VehicleEnquiryResponseModel(
+                    vehicle = VehicleEntity(
+                        registrationNumber = "YY03 TKT",
                         colour = "silver",
                         make = "suzuki",
                         taxStatus = "Taxed",

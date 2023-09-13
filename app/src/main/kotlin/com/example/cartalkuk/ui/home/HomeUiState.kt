@@ -1,6 +1,6 @@
 package com.example.cartalkuk.ui.home
 
-import com.example.cartalkuk.data.model.VehicleEnquiryResponseModel
+import com.example.cartalkuk.database.entity.VehicleEntity
 
 sealed interface HomeUiState {
     val registration: String
@@ -19,6 +19,6 @@ sealed interface HomeUiState {
 
     data class VehicleDetails(
         override val registration: String,
-        val vehicle: VehicleEnquiryResponseModel
+        val vehicle: VehicleEntity
     ): HomeUiState
 }

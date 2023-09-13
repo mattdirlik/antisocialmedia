@@ -1,7 +1,14 @@
-package com.example.cartalkuk.data.model
+package com.example.cartalkuk.database.entity
 
-data class VehicleEnquiryResponseModel(
-    val registrationNumber: String? = null,
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.example.cartalkuk.data.CarTalkConstants.GarageDatabase
+import com.example.cartalkuk.data.model.VehicleEnquiryApiErrorModel
+
+@Entity(tableName = GarageDatabase)
+data class VehicleEntity(
+    @PrimaryKey
+    val registrationNumber: String,
     val make: String? = null,
     val colour: String? = null,
     val taxStatus: String? = null,

@@ -43,7 +43,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = kotlin_compiler_ext_version
     }
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -71,6 +71,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$compose_nav_version")
     implementation("androidx.room:room-runtime:$room_version")
     implementation("com.google.dagger:hilt-android:$hilt_version")
+    implementation("androidx.hilt:hilt-navigation-compose:$hilt_navigation_version")
 
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 

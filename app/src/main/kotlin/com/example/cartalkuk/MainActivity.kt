@@ -15,8 +15,10 @@ import com.example.cartalkuk.nav.CarTalkNavHost
 import com.example.cartalkuk.ui.appwide.CarTalkBottomNavigation
 import com.example.cartalkuk.ui.appwide.CarTalkTopBar
 import com.example.cartalkuk.ui.theme.RegCheckerTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {

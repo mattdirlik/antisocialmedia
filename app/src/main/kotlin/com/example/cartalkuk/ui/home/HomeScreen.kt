@@ -14,6 +14,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cartalkuk.ui.queryconfirmation.QueryConfirmationCard
 import com.example.cartalkuk.ui.vehicledetails.VehicleDetailsScreen
@@ -21,7 +22,7 @@ import com.example.cartalkuk.vm.home.HomeViewModel
 
 @Composable
 fun HomeScreen(
-    homeViewModel: HomeViewModel = viewModel()
+    homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -32,6 +33,7 @@ fun HomeScreen(
                 is HomeUiState.VehicleDetails -> {
                     VehicleDetailsScreen(
                         vehicle = vehicle,
+                        onAddToGarageClick = { homeViewModel.upsertVehicleToGarage(vehicle)},
                         onBackPressed = { homeViewModel.setVehicleDetailsOpenStatus(false) }
                     )
                 }
