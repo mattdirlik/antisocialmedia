@@ -48,7 +48,7 @@ class HomeViewModel @Inject constructor(
                             )
                         } else {
                             viewModelState.copy(
-                                errorMessage = errors.first().detail,
+                                errorMessage = errors!!.first().detail,
                                 isLoadingSpinnerShown = false
                             )
                         }

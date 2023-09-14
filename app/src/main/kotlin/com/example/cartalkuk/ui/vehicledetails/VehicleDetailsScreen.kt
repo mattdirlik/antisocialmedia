@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -33,12 +34,9 @@ import com.example.cartalkuk.ui.vehicledetails.MotStatus.NotValid
 import com.example.cartalkuk.ui.vehicledetails.MotStatus.NoResults
 import com.example.cartalkuk.ui.vehicledetails.MotStatus.NoDetailsHeld
 import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard
-import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard
-.StatusValidityCardVariant.ValidVariant
-import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard
-.StatusValidityCardVariant.InvalidVariant
-import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard
-.StatusValidityCardVariant.UnknownVariant
+import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard.StatusValidityCardVariant.ValidVariant
+import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard.StatusValidityCardVariant.InvalidVariant
+import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard.StatusValidityCardVariant.UnknownVariant
 
 
 @Composable
@@ -47,39 +45,49 @@ fun VehicleDetailsScreen(
     onAddToGarageClick: () -> Unit = {},
     onBackPressed: () -> Unit = {}
 ) {
-    with(vehicle) {
-        RegistrationPlate(
-            registration = registrationNumber
-        )
+    LazyColumn {
+        with(vehicle) {
+            item {
+                RegistrationPlate(
+                    registration = registrationNumber
+                )
+            }
 
-        TaxAndMotStatusRow(
-            taxStatus = taxStatus,
-            taxDueDate = taxDueDate,
-            motStatus = motStatus,
-            motExpiryDate = motExpiryDate
-        )
+            item {
+                TaxAndMotStatusRow(
+                    taxStatus = taxStatus,
+                    taxDueDate = taxDueDate,
+                    motStatus = motStatus,
+                    motExpiryDate = motExpiryDate
+                )
+            }
 
-        VehicleDetailsList(
-            colour = colour ?: "",
-            make = make ?: "",
-            firstRegDate = monthOfFirstRegistration,
-            firstDvlaRegDate = monthOfFirstDvlaRegistration,
-            engineCapacity = engineCapacity,
-            co2Emissions = co2Emissions,
-            euroStatus = euroStatus,
-            yearOfManufacture = yearOfManufacture,
-            realDrivingEmissions = realDrivingEmissions,
-            exportMarker = markedForExport,
-            fuelType = fuelType,
-            vehicleTypeApproval = typeApproval,
-            wheelplan = wheelplan,
-            revenueWeight = revenueWeight,
-            v5cDate = dateOfLastV5CIssued
-        )
+            item {
+                VehicleDetailsList(
+                    colour = colour ?: "",
+                    make = make ?: "",
+                    firstRegDate = monthOfFirstRegistration,
+                    firstDvlaRegDate = monthOfFirstDvlaRegistration,
+                    engineCapacity = engineCapacity,
+                    co2Emissions = co2Emissions,
+                    euroStatus = euroStatus,
+                    yearOfManufacture = yearOfManufacture,
+                    realDrivingEmissions = realDrivingEmissions,
+                    exportMarker = markedForExport,
+                    fuelType = fuelType,
+                    vehicleTypeApproval = typeApproval,
+                    wheelplan = wheelplan,
+                    revenueWeight = revenueWeight,
+                    v5cDate = dateOfLastV5CIssued
+                )
+            }
 
-        AddCarToGarageButton(
-            onClick = onAddToGarageClick
-        )
+            item {
+                AddCarToGarageButton(
+                    onClick = onAddToGarageClick
+                )
+            }
+        }
     }
 
     BackHandler {
