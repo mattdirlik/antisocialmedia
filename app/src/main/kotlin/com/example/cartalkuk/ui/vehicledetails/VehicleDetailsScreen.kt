@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,20 +24,20 @@ import androidx.compose.ui.unit.dp
 import com.example.cartalkuk.database.entity.VehicleEntity
 import com.example.cartalkuk.ui.garage.AddCarToGarageButton
 import com.example.cartalkuk.ui.theme.RegCheckerTheme
-import com.example.cartalkuk.ui.theme.RegistrationPlateBackground
 import com.example.cartalkuk.ui.theme.RegPlateTextStyle
-import com.example.cartalkuk.ui.vehicledetails.TaxStatus.Taxed
-import com.example.cartalkuk.ui.vehicledetails.TaxStatus.Sorn
-import com.example.cartalkuk.ui.vehicledetails.TaxStatus.NotRoadTaxed
-import com.example.cartalkuk.ui.vehicledetails.TaxStatus.Untaxed
-import com.example.cartalkuk.ui.vehicledetails.MotStatus.Valid
-import com.example.cartalkuk.ui.vehicledetails.MotStatus.NotValid
-import com.example.cartalkuk.ui.vehicledetails.MotStatus.NoResults
+import com.example.cartalkuk.ui.theme.RegistrationPlateBackground
 import com.example.cartalkuk.ui.vehicledetails.MotStatus.NoDetailsHeld
+import com.example.cartalkuk.ui.vehicledetails.MotStatus.NoResults
+import com.example.cartalkuk.ui.vehicledetails.MotStatus.NotValid
+import com.example.cartalkuk.ui.vehicledetails.MotStatus.Valid
+import com.example.cartalkuk.ui.vehicledetails.TaxStatus.NotRoadTaxed
+import com.example.cartalkuk.ui.vehicledetails.TaxStatus.Sorn
+import com.example.cartalkuk.ui.vehicledetails.TaxStatus.Taxed
+import com.example.cartalkuk.ui.vehicledetails.TaxStatus.Untaxed
 import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard
-import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard.StatusValidityCardVariant.ValidVariant
 import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard.StatusValidityCardVariant.InvalidVariant
 import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard.StatusValidityCardVariant.UnknownVariant
+import com.example.cartalkuk.ui.vehicledetails.statusvalidity.StatusValidityCard.StatusValidityCardVariant.ValidVariant
 
 
 @Composable
@@ -45,10 +46,13 @@ fun VehicleDetailsScreen(
     onAddToGarageClick: () -> Unit = {},
     onBackPressed: () -> Unit = {}
 ) {
-    LazyColumn {
+    LazyColumn(
+        modifier = Modifier.padding(horizontal = 24.dp)
+    ) {
         with(vehicle) {
             item {
                 RegistrationPlate(
+                    modifier = Modifier.padding(vertical = 16.dp),
                     registration = registrationNumber
                 )
             }
@@ -103,13 +107,15 @@ fun RegistrationPlate(
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(8.dp))
+            .fillMaxWidth()
             .background(RegistrationPlateBackground)
-            .padding(horizontal = 64.dp)
-            .padding(vertical = 8.dp)
+            .padding(vertical = 8.dp),
+        contentAlignment = Alignment.Center
     ) {
         Text(
             text = registration,
-            style = RegPlateTextStyle
+            style = RegPlateTextStyle,
+            minLines = 1
         )
     }
 }
@@ -124,8 +130,7 @@ fun TaxAndMotStatusRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(IntrinsicSize.Max)
-            .padding(24.dp),
+            .height(IntrinsicSize.Max),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         val taxVariant = when (taxStatus) {

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -56,9 +58,12 @@ fun StatusValidityCard(
                 textAlign = TextAlign.Center
             )
 
-            variant.icon?.let { validityIcon ->
-                validityIcon()
-            }
+            Icon(
+                modifier = Modifier.size(64.dp),
+                imageVector = variant.icon,
+                contentDescription = "",
+                tint = variant.colour
+            )
         }
 
         Card(
@@ -90,35 +95,21 @@ fun StatusValidityCard(
 object StatusValidityCard {
     sealed class StatusValidityCardVariant {
         abstract val colour: Color
-        abstract val icon: (@Composable () -> Unit)?
+        abstract val icon: ImageVector
 
         object ValidVariant : StatusValidityCardVariant() {
             override val colour = ValidColour
-            override val icon = @Composable {
-                    Icon(
-                        modifier = Modifier.size(64.dp),
-                        imageVector = Icons.Default.Check,
-                        contentDescription = "",
-                        tint = colour
-                    )
-                }
+            override val icon = Icons.Default.Check
         }
 
         object InvalidVariant : StatusValidityCardVariant() {
             override val colour = InvalidColour
-            override val icon = @Composable {
-                Icon(
-                    modifier = Modifier.size(64.dp),
-                    imageVector = Icons.Default.Close,
-                    contentDescription = "",
-                    tint = colour
-                )
-            }
+            override val icon = Icons.Default.Close
         }
 
         object UnknownVariant : StatusValidityCardVariant() {
             override val colour = UnknownColour
-            override val icon = null
+            override val icon = Icons.Default.Warning
         }
     }
 }
